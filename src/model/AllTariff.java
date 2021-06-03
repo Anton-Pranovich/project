@@ -1,5 +1,5 @@
 package model;
 
 public enum AllTariff {
-	TARIFF, tariff, A1
+	 A1, Life, Mtc
 }
