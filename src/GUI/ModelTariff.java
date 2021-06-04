@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTariff extends AbstractTableModel {
 
 	/**
-	* 
+	* В этом классе создаем тарифные планы и добавдяем их в таблицу JTable
 	*/
 	private static final long serialVersionUID = -8855614213849594120L;
 	List<Tariff> tariff = new ArrayList<>();
@@ -18,7 +18,7 @@ public class ModelTariff extends AbstractTableModel {
 	Class<?> colClasses[] = { String.class, String.class, Double.class, Double.class, Double.class, Double.class,
 			Double.class, String.class };
 
-	ModelTariff() {
+	ModelTariff() { 
 		tariff.add(new Tariff("КомфортМ", "A1", 26.9, 0.0, 0.1, 0.1, 0.078,
 				"Абонентская плата для новых абонентов с учетом скидки:\r\n" + "Первые 3 месяца - 13,90 руб./мес."));
 		tariff.add(new Tariff("Привет", "A1", 0, 0.104, 0.104, 0.104, 0.104, "0,00 руб/мес абонентская плата"));

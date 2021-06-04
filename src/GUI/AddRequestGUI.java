@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -21,42 +23,46 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.AllTariff;
-import model.Client;
-
-
-public class SearchGUI<Tariff> {
+import model.Request;
+/**
+ * 
+ * @author Anton
+ *
+ * @param <Tariff>
+ */
+public class AddRequestGUI<Tariff> {
 	JFrame frame;
 	private JButton buttonAddRequest;
 	private JPanel panel_1, panel_2, panel;
 	private JLabel labelName, labelSecondName, labelPatronymic, labelAge, labelBirthday, labelPassport, labelTariff;
 	private JTextField textName, textSecondName, textPatronymic, textAge, textBirthday, textPassport, textTariff;
 	private boolean isEmpty = false;
-
-
+	public static final String FILE_NAME = "request.txt";
+	private boolean append = true;
 
 	public void run() throws IOException {
-	//	List<Client> clients = new ArrayList<>();
-	//	List<Tariff> tariffs = new ArrayList<>();
-		Map<String, Client> request = new HashMap<>();
-		File file = new File("request.txt");
-		file.createNewFile();
+
+		List<Request> request = new ArrayList<>();
+
+		FileOutputStream fos = new FileOutputStream(FILE_NAME, append);		
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
 		frame = new JFrame();
 		frame.setSize(1050, 500);// размер
 		frame.setTitle("Search Tariffs"); // заголовок
 		frame.setLocationRelativeTo(null);// расположение
 		frame.setResizable(false);// нельзя изменять размер
 
-		panel_1 = new JPanel();
-		panel_1.setSize(650, 765);
-		panel_1.setBackground(Color.WHITE);
+		panel_1 = new JPanel(); //создает панель
+		panel_1.setSize(650, 765); // задаем разиеры панели
+		panel_1.setBackground(Color.WHITE);//задаем цвет фона панели
 
-		panel_2 = new JPanel();
-		panel_2.setSize(340, 765);
+		panel_2 = new JPanel();//создаем панель
+		panel_2.setSize(340, 765);//задаем размеры панели
 
-		panel = new JPanel();
+		panel = new JPanel();//создаем панель для объединения предыдущих панелей
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.add(panel_1);
-		panel.add(panel_2);
+		panel.add(panel_1); //добавляем панель 1 
+		panel.add(panel_2); //добавляем панель 2
 
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		panel_2.setBorder(BorderFactory.createEmptyBorder(20, 0, 320, 0));
@@ -77,7 +83,7 @@ public class SearchGUI<Tariff> {
 		textPassport = new JTextField(20);
 		textTariff = new JTextField(20);
 
-		buttonAddRequest = new JButton("Add request");
+		buttonAddRequest = new JButton("Add request"); //кнопка добавления заявки на тариф
 
 		BufferedImage iconSanta = ImageIO.read(new File("src/images/заявка.png"));
 		JLabel picLabel = new JLabel(new ImageIcon(iconSanta));
@@ -131,13 +137,29 @@ public class SearchGUI<Tariff> {
 					}
 					if (isEmpty) {
 						JOptionPane.showMessageDialog(null, "Успешно добавлен", "Добавление", 1);
-//						clients.add(new Client(textName.getText(), textSecondName.getText(), textPatronymic.getText(),
-//								textAge.getText(), textBirthday.getText(), textPassport.getText()));
-						request.put(textTariff.getText(),
-								new Client(textName.getText(), textSecondName.getText(), textPatronymic.getText(),
-										textAge.getText(), textBirthday.getText(), textPassport.getText()));
+
+						request.add(new Request(textTariff.getText(), textName.getText(), textSecondName.getText(),
+								textPatronymic.getText(), textAge.getText(), textBirthday.getText(),
+								textPassport.getText()));
+						try {
+							oos.writeObject(new Request(textTariff.getText(), textName.getText(),
+									textSecondName.getText(), textPatronymic.getText(), textAge.getText(),
+									textBirthday.getText(), textPassport.getText()));
+
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						} finally {
+							try {
+								oos.flush();
+								oos.close();
+								fos.close();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+
 					}
-					
+
 				}
 
 			}

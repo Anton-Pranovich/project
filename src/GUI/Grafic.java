@@ -49,7 +49,7 @@ public class Grafic<Tariff> {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		panel.add(panel_1);
 	
-		buttonSearch = new JButton("Search the tariff");
+		buttonSearch = new JButton("AddRequest");
 		panel_1.add(buttonSearch);
 		buttonShow = new JButton("Show all tariffs");
 		panel_1.add(buttonShow);
@@ -65,9 +65,9 @@ public class Grafic<Tariff> {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SearchGUI<Tariff> searchGUI = new SearchGUI<>();
+				AddRequestGUI<Tariff> addRequestGUI = new AddRequestGUI<>();
 					try {
-						searchGUI.run();
+						addRequestGUI.run();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
