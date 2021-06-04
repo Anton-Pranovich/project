@@ -1,18 +1,24 @@
 package model;
+
 import java.util.Objects;
 
+/**
+ * Класс, представляющий модель тарифного плана. Тарифный план содержит название
+ * тарифного плана, название оператора, к которому он принадлежит, стоимость
+ * абонентской платы, стоимость звонков внутри сети, а также в другие сети и на
+ * домашнюю сеть, стоимость смс-сообщений.
+ */
 public class Tariff {
 	private String name;
 	private String operatorName;
 	private double payroll;
 	private double callPricesWithinTheNetwork;
 	private double callPricesOutsideTheNetwork;
-	private double callPricesеToHomeNetwork;
+	private double callPricesToHomeNetwork;
 	private double smsPrice;
 	private String parameters;
 
 	public Tariff() {
-
 	}
 
 	public Tariff(String name, String operatorName, double payroll, double callPricesWithinTheNetwork,
@@ -23,7 +29,7 @@ public class Tariff {
 		this.payroll = payroll;
 		this.callPricesWithinTheNetwork = callPricesWithinTheNetwork;
 		this.callPricesOutsideTheNetwork = callPricesOutsideTheNetwork;
-		this.callPricesеToHomeNetwork = callPricesеToHomeNetwork;
+		this.callPricesToHomeNetwork = callPricesеToHomeNetwork;
 		this.smsPrice = smsPrice;
 		this.parameters = parameters;
 	}
@@ -69,11 +75,11 @@ public class Tariff {
 	}
 
 	public double getCallPricesеToHomeNetwork() {
-		return callPricesеToHomeNetwork;
+		return callPricesToHomeNetwork;
 	}
 
-	public void setCallPricesеToHomeNetwork(double callPricesеToHomeNetwork) {
-		this.callPricesеToHomeNetwork = callPricesеToHomeNetwork;
+	public void setCallPricesеToHomeNetwork(double callPricesToHomeNetwork) {
+		this.callPricesToHomeNetwork = callPricesToHomeNetwork;
 	}
 
 	public double getSmsPrice() {
@@ -92,11 +98,9 @@ public class Tariff {
 		this.parameters = parameters;
 	}
 
-
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(callPricesOutsideTheNetwork, callPricesWithinTheNetwork, callPricesеToHomeNetwork, name,
+		return Objects.hash(callPricesOutsideTheNetwork, callPricesWithinTheNetwork, callPricesToHomeNetwork, name,
 				operatorName, parameters, payroll, smsPrice);
 	}
 
@@ -113,8 +117,8 @@ public class Tariff {
 				.doubleToLongBits(other.callPricesOutsideTheNetwork)
 				&& Double.doubleToLongBits(callPricesWithinTheNetwork) == Double
 						.doubleToLongBits(other.callPricesWithinTheNetwork)
-				&& Double.doubleToLongBits(callPricesеToHomeNetwork) == Double
-						.doubleToLongBits(other.callPricesеToHomeNetwork)
+				&& Double.doubleToLongBits(callPricesToHomeNetwork) == Double
+						.doubleToLongBits(other.callPricesToHomeNetwork)
 				&& Objects.equals(name, other.name) && Objects.equals(operatorName, other.operatorName)
 				&& Objects.equals(parameters, other.parameters)
 				&& Double.doubleToLongBits(payroll) == Double.doubleToLongBits(other.payroll)
@@ -123,12 +127,9 @@ public class Tariff {
 
 	@Override
 	public String toString() {
-		return  "operatorName:" + operatorName+", Tariff name:" + name  + ", payroll:" + payroll
+		return "operatorName:" + operatorName + ", Tariff name:" + name + ", payroll:" + payroll
 				+ ", callPricesWithinTheNetwork:" + callPricesWithinTheNetwork + ", callPricesOutsideTheNetwork:"
-				+ callPricesOutsideTheNetwork + ", callPricesеToHomeNetwork:" + callPricesеToHomeNetwork + ", smsPrice:"
+				+ callPricesOutsideTheNetwork + ", callPricesеToHomeNetwork:" + callPricesToHomeNetwork + ", smsPrice:"
 				+ smsPrice + ", parameters:" + parameters + "]";
 	}
-
-	
-	
 }

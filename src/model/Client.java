@@ -1,6 +1,11 @@
 package model;
+
 import java.util.Objects;
 
+/**
+ * этот класс является шаблоном для Клиента * @author Anton
+ *
+ */
 public class Client {
 	private String firstName;
 	private String secondName;
@@ -10,10 +15,10 @@ public class Client {
 	private String passport;
 
 	public Client() {
-
 	}
 
-	public Client(String firstName, String secondName, String patronymic, String age, String birthday, String passport) {
+	public Client(String firstName, String secondName, String patronymic, String age, String birthday,
+			String passport) {
 		super();
 		this.firstName = firstName;
 		this.secondName = secondName;
@@ -71,8 +76,6 @@ public class Client {
 		this.passport = passport;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(age, birthday, firstName, passport, patronymic, secondName);
@@ -97,5 +100,4 @@ public class Client {
 		return "Client [firstName=" + firstName + ", secondName=" + secondName + ", patronymic=" + patronymic + ", age="
 				+ age + ", birthday=" + birthday + ", passport=" + passport + "]";
 	}
-
 }
